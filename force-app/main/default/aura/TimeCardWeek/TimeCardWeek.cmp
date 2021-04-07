@@ -1,0 +1,233 @@
+<aura:component Controller="TimeCardWeekController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="theWrapper" type="object"/>
+    <aura:attribute name="theSelectWeekTimeCardList" type="object"/>
+    <aura:attribute name="theSelectDate" type="String"/>
+    <aura:attribute name="theSelectWeekStartDate" type="String" default=""/>
+    <aura:attribute name="theSelectWeekEndDate" type="String" default=""/>
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="selectedRecord" type="Time_Card__c"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="slds-card">
+        <aura:if isTrue="{!v.Spinner}">
+            <div aura:id="spinnerId" class="slds-spinner_container">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </aura:if>
+        <div>
+            <!-- Current Week -->
+            <div class="slds-p-around--large">
+                <p style="font-size:15px;">{!v.theWrapper.theUser.Name}'s Time Cards - Current Week</p> 
+                <br/>
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                    <thead>
+                        <tr class="slds-text-title--caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Opportunity">Opportunity</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Week of">Week Of</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Hours Logged">Hours Logged</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Status">Status</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.theWrapper.theCurrentWeekTimeCard}" var="theTC">
+                            <tr>
+                                <th scope="row">
+                                    <lightning:formattedUrl value="{!'/' + theTC.Opportunity__c}" label="{!theTC.Opportunity__r.Name}"/>
+                                </th>
+                                <th scope="row">
+                                    <lightning:formattedDateTime value="{!theTC.Week_Start_Date__c}" year="numeric" month="numeric" day="numeric"/>
+                                    <!-- <div class="slds-truncate" ">{!theTC.Week_Start_Date__c}</div> -->
+                                </th>
+                                <th scope="row">
+                                    <aura:if isTrue="{!not(empty(theTC.Hours_Logged__c))}">
+                                        <div class="slds-truncate">{!theTC.Hours_Logged__c}</div>
+                                    </aura:if>
+                                    <aura:if isTrue="{!(empty(theTC.Hours_Logged__c))}">
+                                        <div class="slds-truncate">0</div>
+                                    </aura:if>
+                                </th>
+                                <th scope="row">
+                                    <div onclick="{!c.updateTimeCard}" data-value="{!theTC.Id}">
+                                        <lightning:icon iconName="utility:edit" alternativeText="edit!" title="edit" size="x-small"/>
+                                    </div>
+                                </th>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Previous Week -->
+            <div class="slds-p-around--large">
+                
+                <p style="font-size:15px;">{!v.theWrapper.theUser.Name}'s Time Cards - Previous Week &nbsp;<a onclick="{!c.copyLastWeek}"> &nbsp;Copy all Time Cards to current week</a> </p> 
+                <br/>
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                    <thead>
+                        <tr class="slds-text-title--caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Opportunity">Opportunity</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Week of">Week Of</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Hours Logged">Hours Logged</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Status">Status</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <aura:iteration items="{!v.theWrapper.thePreviousWeekTimeCard}" var="theTC">
+                            <tr>
+                                <th scope="row">
+                                    <lightning:formattedUrl value="{!'/' + theTC.Opportunity__c}" label="{!theTC.Opportunity__r.Name}"/>
+                                </th>
+                                <th scope="row">
+                                    <lightning:formattedDateTime value="{!theTC.Week_Start_Date__c}" year="numeric" month="numeric" day="numeric"/>
+                                </th>
+                                <th scope="row">
+                                    <div class="slds-truncate">{!theTC.Hours_Logged__c}</div>
+                                </th>
+                                <th scope="row">
+                                    <div onclick="{!c.updateTimeCard}" data-value="{!theTC.Id}">
+                                        <lightning:icon iconName="utility:edit" alternativeText="edit!" title="edit" size="x-small"/>
+                                    </div>
+                                </th>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="slds-grid slds-gutters" style="margin-top:30px;">
+                <div class="slds-col" style="width:10%; margin-Left:30px;">
+                    <p>Select a week to view time Cards </p>
+                </div>
+                <div class="slds-col" style="width:10%; margin-Left:0px;">
+                    <div> 
+                        <lightning:input variant="label-hidden" type="date" Style="width:50px" onchange="{!c.SelectWeek}" value="{!v.theSelectDate}"/>
+                    </div>
+                </div>
+                <div class="slds-col" style="width:40%;">
+                </div>
+            </div>
+            
+            <!-- Selected Week -->
+            <div class="slds-p-around--large">
+                <p style="font-size:15px;">{!v.theWrapper.theUser.Name}'s Time Cards
+                    <aura:if isTrue="{!not(empty(v.theSelectWeekEndDate))}">
+                        - <lightning:formattedDateTime value="{!v.theSelectWeekStartDate}" year="numeric" month="numeric" day="numeric"/> -
+                        <lightning:formattedDateTime value="{!v.theSelectWeekEndDate}" year="numeric" month="numeric" day="numeric"/>
+                        &nbsp;<aura:if isTrue="{!not(empty(v.theSelectWeekTimeCardList))}">
+                            <a onclick="{!c.copySelectedWeek}"> &nbsp; Copy all Time Cards to current week</a>
+                        </aura:if>
+                    </aura:if>
+                </p> 
+                <br/>
+                <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                    <thead>
+                        <tr class="slds-text-title--caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Opportunity">Opportunity</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Week of">Week Of</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Hours Logged">Hours Logged</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Status">Status</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.theSelectWeekTimeCardList}" var="theTC">
+                            <tr>
+                                <th scope="row">
+                                    <lightning:formattedUrl value="{!'/' + theTC.Opportunity__c}" label="{!theTC.Opportunity__r.Name}"/>
+                                </th>
+                                <th scope="row">
+                                    <lightning:formattedDateTime value="{!theTC.Week_Start_Date__c}" year="numeric" month="numeric" day="numeric"/>
+                                </th>
+                                <th scope="row">
+                                    <div class="slds-truncate">{!theTC.Hours_Logged__c}</div>
+                                </th>
+                                <th scope="row">
+                                    <div onclick="{!c.updateTimeCard}" data-value="{!theTC.Id}">
+                                        <lightning:icon iconName="utility:edit" alternativeText="edit!" title="edit" size="x-small"/>
+                                    </div>
+                                </th>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- ModalBox-->
+        <div class="slds-m-around_xx-large">
+            <aura:if isTrue="{!v.isOpen}">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                            
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit Time Card</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col" style="width:30%;">
+                                    <div style="height:50px">
+                                        Opportunity
+                                    </div>
+                                    <div style="height:50px">
+                                        Week
+                                    </div>
+                                    <div style="height:60px">
+                                        Hours
+                                    </div>
+                                </div>
+                                <div class="slds-col">
+                                    <div style="height:50px">
+                                        {!v.selectedRecord.Opportunity__r.Name}
+                                    </div>
+                                    <div style="height:50px">
+                                        {!v.selectedRecord.Week_Start_Date__c}
+                                    </div>
+                                    <div style="height:50px">
+                                        <lightning:input type="Number" variant="label-hidden" value="{!v.selectedRecord.Hours_Logged__c}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.closeModel}"/>
+                            <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.SaveTimeCard}"/>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </aura:if>
+        </div>
+    </div>
+    
+</aura:component>
