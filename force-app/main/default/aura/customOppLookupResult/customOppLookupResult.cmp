@@ -1,0 +1,17 @@
+<aura:component >
+    <aura:attribute name="oOpportunity" type="Opportunity" />
+    <!--Register the component level event-->
+    <aura:registerEvent name="oSelectedOpportunityEvent" type="c:selectedOpportunityEvent"/>
+    
+    <li role="presentation">
+        <span class="slds-lookup__item-action slds-media slds-media--center" id="lookup-option-350" role="option">
+            <div class="slds-media__body">
+                <div class="slds-input-has-icon slds-input-has-icon--right">
+                    
+                    
+                    <div class="slds-lookup__result-text"><a onclick="{!c.selectOpportunity}"><lightning:icon iconName="standard:opportunity" alternativeText="opportunity" title="opportunity" size='small' />&nbsp;&nbsp;&nbsp;&nbsp;{!v.oOpportunity.Name}</a></div>
+                </div>
+            </div>    
+        </span>
+    </li>
+</aura:component>

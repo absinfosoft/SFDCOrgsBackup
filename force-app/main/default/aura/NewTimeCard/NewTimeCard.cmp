@@ -1,0 +1,222 @@
+<aura:component controller = "NewTimeCardController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride" access="global">
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="true"/>
+    <aura:attribute name="timeCardObj" type="Time_Card__c"/>
+    <aura:attribute name="OppName" type="object"/>
+    <aura:attribute name="lastName" type="string"/>
+    <aura:attribute name="wrapperObj" type="object"/>
+    <aura:attribute name="theWeekShift" type="Integer" default="0"/>
+    <aura:attribute name="SaveSuccess" type="Boolean" default="false"/>
+    <aura:attribute name="theLastTimeCardId" type="String" default=""/>
+    <!-- lookup attribute -->
+    <aura:attribute name="selectedRecord" type="Opportunity" default="{}" description="Use,for store SELECTED sObject Record"/>
+    <aura:attribute name="listOfSearchRecords" type="Opportunity[]" description="Use,for store the list of search records which returns from apex class"/>
+    <aura:attribute name="SearchKeyWord" type="string"/>
+    <!--declare events hendlers-->  
+    <aura:handler name="oSelectedOpportunityEvent" event="c:selectedOpportunityEvent" action="{!c.handleComponentEvent}"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!(empty(v.recordId))}">
+        <div class="slds-m-around_xx-large">
+            <aura:if isTrue="{!v.isModalOpen}">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeModel }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Time Card</h2>
+                        </header>
+                        
+                        <div style="padding:50px;" class="slds-card">
+                            
+                            <aura:if isTrue="{!v.Spinner}">
+                                <div aura:id="spinnerId" class="slds-spinner_container">
+                                    <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                                        <span class="slds-assistive-text">Loading</span>
+                                        <div class="slds-spinner__dot-a"></div>
+                                        <div class="slds-spinner__dot-b"></div>
+                                    </div>
+                                </div>
+                            </aura:if>
+                            
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col" style="width:30%;">
+                                    <div style="height:50px">
+                                        Time Card Owner
+                                    </div>
+                                    <div style="height:50px">
+                                        Week
+                                    </div>
+                                    <div style="height:50px">
+                                        Opportunity
+                                    </div>
+                                    <div style="height:60px">
+                                        Hours
+                                    </div>
+                                </div>
+                                <div class="slds-col">
+                                    <div style="height:50px">
+                                        {!v.wrapperObj.theUser.Name}
+                                    </div>
+                                    <div style="height:50px">
+                                        <button class="slds-button slds-button--icon slds-pill__remove" onclick="{!c.decrease}" style="margin-right: 10px">
+                                            <lightning:icon iconName="utility:left" alternativeText="left!" title="left" size="x-small" />
+                                        </button>
+                                        {!v.wrapperObj.theWeek}
+                                        <button class="slds-button slds-button--icon slds-pill__remove" onclick="{!c.increase}" style="margin-Left: 10px">
+                                            <lightning:icon iconName="utility:right" alternativeText="right!" title="right" size="x-small" />
+                                        </button>
+                                    </div>
+                                    <div style="height:40px">
+                                        <div aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close" data-select="single">
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-input-has-icon slds-input-has-icon--right">
+                                                    <div aura:id="lookup-pill" class="slds-pill-container slds-hide">
+                                                        <span class="slds-pill" Style="width:100%">
+                                                            <span class="slds-pill__label">
+                                                                
+                                                                <button class="slds-button slds-button_icon slds-button_icon-border-filled" aria-pressed="false" title="Like" style="margin-Right: 10px">
+                                                                    <lightning:icon iconName="standard:opportunity" alternativeText="opportunity" title="opportunity" />
+                                                                </button>
+                                                                {!v.selectedRecord.Name}
+                                                                
+                                                            </span>
+                                                            <button class="slds-button slds-button--icon slds-pill__remove" onclick="{!c.clear}" style="margin-Left: 10px">
+                                                                <lightning:icon iconName="utility:close" alternativeText="Close!" title="Close" />
+                                                            </button>
+                                                            
+                                                        </span>
+                                                    </div>
+                                                    <div aura:id="lookupField" class="slds-show">
+                                                        <ui:inputText  updateOn="keyup" keyup="{!c.keyPressController}" class="slds-lookup__search-input slds-input " value="{!v.SearchKeyWord}" placeholder="search.."/>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                            <!--This part is for Display typehead lookup result List-->  
+                                            <div class="slds-lookup__menu slds" id="lookup-348">
+                                                <ul class="slds-lookup__list" role="listbox">
+                                                    <aura:iteration items="{!v.listOfSearchRecords}" var="singleRec">
+                                                        <c:customOppLookupResult oOpportunity="{!singleRec}" />
+                                                    </aura:iteration>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="height:50px">
+                                        <lightning:input type="Number" value="{!v.wrapperObj.theHour}" />
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <footer class="slds-modal__footer">
+                            <div style="text-align:center;">
+                                <lightning:button variant="neutral" label="Cancel" onclick="{! c.closeModel }"/>
+                                
+                                <lightning:button variant="brand" label="Save and New" onclick="{! c.SaveAndNew }"/>
+                                
+                                <lightning:button variant="brand" label="Save" onclick="{!c.Save}"/>
+                            </div>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </aura:if>
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!not(empty(v.recordId))}">
+       
+        
+        <div style="padding:10px;" class="slds-card">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col" style="width:30%;">
+                    <div style="height:50px">
+                        Time Card Owner
+                    </div>
+                    <div style="height:50px">
+                        Week
+                    </div>
+                    <div style="height:50px">
+                        Opportunity
+                    </div>
+                    <div style="height:60px">
+                        Hours
+                    </div>
+                </div>
+                <div class="slds-col">
+                    <div style="height:50px">
+                        {!v.wrapperObj.theUser.Name}
+                    </div>
+                    <div style="height:50px">
+                        <button class="slds-button slds-button--icon slds-pill__remove" onclick="{!c.decrease}" style="margin-right: 10px">
+                            <lightning:icon iconName="utility:left" alternativeText="left!" title="left" size="x-small" />
+                        </button>
+                        {!v.wrapperObj.theWeek}
+                        <button class="slds-button slds-button--icon slds-pill__remove" onclick="{!c.increase}" style="margin-Left: 10px">
+                            <lightning:icon iconName="utility:right" alternativeText="right!" title="right" size="x-small" />
+                        </button>
+                    </div>
+                    <div style="height:40px">
+                        <div aura:id="searchRes" class="slds-form-element slds-lookup slds-is-close" data-select="single">
+                            <div class="slds-form-element__control">
+                                <div class="slds-input-has-icon slds-input-has-icon--right">
+                                    <div aura:id="lookup-pill" class="slds-pill-container slds-hide">
+                                        <span class="slds-pill" Style="width:100%">
+                                            <span class="slds-pill__label">
+                                                
+                                                <button class="slds-button slds-button_icon slds-button_icon-border-filled" aria-pressed="false" title="Like" style="margin-Right: 10px">
+                                                    <lightning:icon iconName="standard:opportunity" alternativeText="opportunity" title="opportunity" />
+                                                </button>
+                                                {!v.selectedRecord.Name}
+                                            </span>
+                                            <button class="slds-button slds-button--icon slds-pill__remove" onclick="{!c.clear}" style="margin-Left: 10px">
+                                                <lightning:icon iconName="utility:close" alternativeText="Close!" title="Close" />
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div aura:id="lookupField" class="slds-show">
+                                        <ui:inputText  updateOn="keyup" keyup="{!c.keyPressController}" class="slds-lookup__search-input slds-input " value="{!v.SearchKeyWord}" placeholder="search.."/>
+                                    </div>   
+                                </div>
+                            </div>
+                            <div class="slds-lookup__menu slds" id="lookup-348">
+                                <ul class="slds-lookup__list" role="listbox">
+                                    <aura:iteration items="{!v.listOfSearchRecords}" var="singleRec">
+                                        <c:customOppLookupResult oOpportunity="{!singleRec}" />
+                                    </aura:iteration>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height:50px">
+                        <lightning:input type="Number" value="{!v.wrapperObj.theHour}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <!--<lightning:button variant="neutral" label="Cancel" onclick="{! c.closeModel }"/>-->
+            <lightning:button variant="brand" label="Save and New" onclick="{! c.SaveAndNewFromOpp }"/>
+            <lightning:button variant="brand" label="Save" onclick="{!c.SaveFromOpp}"/>
+        </div>
+    </aura:if>
+    
+</aura:component>
