@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Product_Group__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Used for classifying items for filtering and reporting.  This field is the third level grouping for items and it is the subset for Product Family.</inlineHelpText>
+    <label>Product Group</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GFERP__Product_Group</valueSetName>
+    </valueSet>
+</CustomField>

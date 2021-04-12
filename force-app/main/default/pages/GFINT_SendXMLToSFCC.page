@@ -1,0 +1,24 @@
+<apex:page standardController="GFERP__Item__c" Extensions="GFINT_ForceSendXMLToSFCCController" recordSetVar="" lightningStylesheets="true">
+    <style>
+        /*center top and bottom buttons*/
+        .pbHeader .pbTitle, .pbBottomButtons .pbTitle {
+        display: none!important;
+        }
+        .pbHeader .pbButton, .pbBottomButtons .pbButtonb  {
+        text-align: center!important;
+        }
+    </style>
+    <GFERP:LoadingStatus />
+    <apex:sectionHeader title="Run Batch Update Now"/>
+    <apex:form id="theForm">
+        <apex:pageBlock id="thePageBlock" >
+            <apex:outputPanel >
+                <apex:pageMessage severity="info" title="Are you sure to run force update {!theItemCount} items now? System will reset and send images and XML files to SFCC for all selected items."  />
+            </apex:outputPanel>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Run Batch Now" action="{!callNightlyBatch}" status="loadingstatus" reRender="thePageBlock"/>
+                <apex:commandButton value="Return" action="{!returnBack}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

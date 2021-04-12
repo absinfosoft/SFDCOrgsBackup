@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_XML_to_SFCC</fullName>
+    <availability>online</availability>
+    <description>Reset and send all Item UOMs for selected items as a batch to SFCC.</description>
+    <displayType>massActionButton</displayType>
+    <height>600</height>
+    <linkType>page</linkType>
+    <masterLabel>Send XML to SFCC</masterLabel>
+    <openType>sidebar</openType>
+    <page>GFINT_SendXMLToSFCC</page>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+</WebLink>

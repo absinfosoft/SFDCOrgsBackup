@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Serial_Tracked_Items</fullName>
+    <columns>NAME</columns>
+    <columns>GFERP__Description__c</columns>
+    <columns>GFERP__Base_Unit_of_Measure__c</columns>
+    <columns>GFERP__Low_Level_Code__c</columns>
+    <columns>GFERP__Average_Base_Cost__c</columns>
+    <columns>GFERP__Costing_Method__c</columns>
+    <columns>GFERP__Item_No_Description__c</columns>
+    <columns>GFERP__Qty_Base_on_Hand__c</columns>
+    <columns>GFERP__Item_Category__c</columns>
+    <columns>GFERP__Landed_Cost1_Pct__c</columns>
+    <columns>GFERP__Lot_Picking_Option__c</columns>
+    <columns>GFERP__Item_Type__c</columns>
+    <columns>GFERP__Outside_Service__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>GFERP__Item_Type__c</field>
+        <operation>equals</operation>
+        <value>Inventory</value>
+    </filters>
+    <filters>
+        <field>GFERP__Serial_Tracked__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Serial Tracked Items</label>
+    <language>en_US</language>
+</ListView>

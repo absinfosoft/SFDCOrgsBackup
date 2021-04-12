@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Single_Batch_Printing__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If checked, the Batch Report on Work Order will print this item batch by batch.</inlineHelpText>
+    <label>Single Batch Printing</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

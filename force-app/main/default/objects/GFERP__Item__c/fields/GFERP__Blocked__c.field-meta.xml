@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Blocked__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Checking this field will not allow any inventory transactions to be posted for this item.  An Item cannot be blocked unless there is 0 on hand qty. and 0 open transactions.</inlineHelpText>
+    <label>Blocked</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

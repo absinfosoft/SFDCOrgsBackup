@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Download_XML_To_Local</fullName>
+    <availability>online</availability>
+    <description>Force download all 5 XML files to local drives for all Item UOMs of the selected items, regardless of the previous Upload status.</description>
+    <displayType>massActionButton</displayType>
+    <height>600</height>
+    <linkType>page</linkType>
+    <masterLabel>Download XML To Local</masterLabel>
+    <openType>sidebar</openType>
+    <page>GFINT_DownloadableXMLtoLocal</page>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+</WebLink>

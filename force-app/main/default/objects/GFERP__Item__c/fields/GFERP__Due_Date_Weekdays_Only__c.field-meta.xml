@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Due_Date_Weekdays_Only__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>For both Order Date and Due Date</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used in supply planning.  If checked, the Order Date will fall on weekdays only.</inlineHelpText>
+    <label>Weekdays Only</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

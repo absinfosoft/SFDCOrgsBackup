@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Is_Water__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If checked, this item is a water item.  The active Ingredient % defined on the item formula is used to determined the net requirement of the water on a work order.</inlineHelpText>
+    <label>Is Water</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

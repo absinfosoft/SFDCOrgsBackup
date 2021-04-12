@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Default_Bin__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Define the bin to be used along with the Default Warehouse as the put-away and storage location of the item.</inlineHelpText>
+    <label>Default Bin</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>GFERP__bin__c.GFERP__Warehouse__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.GFERP__Default_Warehouse__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>GFERP__bin__c</referenceTo>
+    <relationshipLabel>Items</relationshipLabel>
+    <relationshipName>Items_del</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
