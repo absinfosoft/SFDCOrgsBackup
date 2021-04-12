@@ -1,8 +1,21 @@
 ({
     doInit : function(component, event, helper) {
+        var pageRef = component.get("v.pageReference");
+        if(pageRef != null && pageRef != 'undefined') {
+            var state = pageRef.state; 
+            var base64Context = state.inContextOfRef;
+            if (base64Context.startsWith("1\.")) {
+                base64Context = base64Context.substring(2);
+            }
+            var addressableContext = JSON.parse(window.atob(base64Context));
+            var theRecordId = addressableContext.attributes.recordId;
+            component.set("v.parentRecordId", theRecordId);
+        }
+        
         var action = component.get("c.fetchOppRecord");
         var theOppId = component.get("v.recordId");
-        action.setParams({theOppId:theOppId});
+        action.setParams({theOppId:theOppId,
+                          theParentIdFromRelatedList:theRecordId});
         action.setCallback(this, function(response) {
             var state = response.getState();
             if (state === "SUCCESS") { 

@@ -1,6 +1,6 @@
 /**********************************************************/
 //Created by: Gram Bischof 04/05/2021
-//Last Modified: Gram Bischof 04/07/2021
+//Last Modified: Gram Bischof 04/12/2021
 //Description:  Controller class of NewTimeCard LC.
 //Test Class : NewTimeCardControllerTest
 /**********************************************************/
@@ -30,7 +30,7 @@ public class NewTimeCardController {
     }
     
     @AuraEnabled
-    public static Wrapper fetchOppRecord(String theOppId) { 
+    public static Wrapper fetchOppRecord(String theOppId, String theParentIdFromRelatedList) { 
         Opportunity theCurrentOpp;
         Date myDate = date.today();
         Date weekStart = myDate.toStartofWeek().addDays(1);
@@ -38,6 +38,9 @@ public class NewTimeCardController {
         Wrapper theWrap = new Wrapper();
         if(theOppId != null){
             theCurrentOpp = [SELECT Id, Name FROM Opportunity WHERE Id =: theOppId];
+            theWrap.theOpp = theCurrentOpp;
+        }else if(theParentIdFromRelatedList != null){
+            theCurrentOpp = [SELECT Id, Name FROM Opportunity WHERE Id =: theParentIdFromRelatedList];
             theWrap.theOpp = theCurrentOpp;
         }
         theWrap.theWeek = weekStart.format()+' - '+weekStart.addDays(6).format();
@@ -48,7 +51,7 @@ public class NewTimeCardController {
     
     @AuraEnabled
     public static String saveTimeCard(String theTimeCardstr) {
-        
+        String theErrorString;
         Date myDate = date.today();
         Date weekStart = myDate.toStartofWeek().addDays(1);
         Wrapper theTimeCardWrapper = (Wrapper)JSON.deserialize(theTimeCardstr, Wrapper.class);
@@ -57,8 +60,12 @@ public class NewTimeCardController {
         if(theTimeCardWrapper.theWeekShift != 0) theTimeCard.Week_Start_Date__c = weekStart.addDays(theTimeCardWrapper.theWeekShift*7);
         else theTimeCard.Week_Start_Date__c = weekStart;
         theTimeCard.Hours_Logged__c = theTimeCardWrapper.theHour;
-        insert theTimeCard;
-        
+        try{
+            insert theTimeCard;
+        }catch(Exception ex){
+            theErrorString = ex.getDmlMessage(0);
+            return 'Error '+theErrorString;
+        }
         return theTimeCard.Id;
     }
     
@@ -72,6 +79,6 @@ public class NewTimeCardController {
         @AuraEnabled 
         public Integer theWeekShift;
         @AuraEnabled 
-        public Integer theHour;
+        public Decimal theHour;
     }
 }

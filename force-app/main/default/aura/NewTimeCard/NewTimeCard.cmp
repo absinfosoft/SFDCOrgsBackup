@@ -1,6 +1,7 @@
-<aura:component controller = "NewTimeCardController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride" access="global">
+<aura:component controller = "NewTimeCardController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride,lightning:isUrlAddressable,lightning:hasPageReference" access="global">
     
     <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="parentRecordId" type="String" />
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="isModalOpen" type="boolean" default="true"/>
     <aura:attribute name="timeCardObj" type="Time_Card__c"/>
@@ -17,6 +18,7 @@
     <!--declare events hendlers-->  
     <aura:handler name="oSelectedOpportunityEvent" event="c:selectedOpportunityEvent" action="{!c.handleComponentEvent}"/>
     <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="message" type="string"/>
     
     <aura:if isTrue="{!v.Spinner}">
         <div aura:id="spinnerId" class="slds-spinner_container">
@@ -28,7 +30,7 @@
         </div>
     </aura:if>
     
-    <aura:if isTrue="{!(empty(v.recordId))}">
+    <aura:if isTrue="{!(or(empty(v.recordId),not(empty(v.parentRecordId))))}">
         <div class="slds-m-around_xx-large">
             <aura:if isTrue="{!v.isModalOpen}">
                 <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
@@ -119,7 +121,7 @@
                                     </div>
                                     
                                     <div style="height:50px">
-                                        <lightning:input type="Number" value="{!v.wrapperObj.theHour}" />
+                                        <lightning:input type="Number" step="0.01" value="{!v.wrapperObj.theHour}" />
                                     </div>
                                 </div>
                                 
@@ -207,7 +209,7 @@
                         </div>
                     </div>
                     <div style="height:50px">
-                        <lightning:input type="Number" value="{!v.wrapperObj.theHour}" />
+                        <lightning:input type="Number" step="0.01" value="{!v.wrapperObj.theHour}" />
                     </div>
                 </div>
             </div>
