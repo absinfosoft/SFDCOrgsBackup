@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Work_Center__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If checked, this service item is used as a work center for the routing.</inlineHelpText>
+    <label>Work Center</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

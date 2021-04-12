@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Batch_Output_Tolerance_Pct__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>When producing this item, enter the tolerance % to be used on a batch manufactured work order.</inlineHelpText>
+    <label>Batch Output Tolerance %</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

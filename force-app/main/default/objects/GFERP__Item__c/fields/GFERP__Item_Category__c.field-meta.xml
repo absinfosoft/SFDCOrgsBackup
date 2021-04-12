@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Item_Category__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Use this field to classify items for filtering and reporting.  This field is the top level grouping for items.</inlineHelpText>
+    <label>Item Category</label>
+    <referenceTo>GFERP__Item_Category__c</referenceTo>
+    <relationshipLabel>Items</relationshipLabel>
+    <relationshipName>Items</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

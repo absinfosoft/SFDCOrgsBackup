@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Inventory_Value__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The calculated inventory value of the item based on the Item Ledger Entries.  This will be the total of the Expected Value plus the Invoiced Value.</inlineHelpText>
+    <label>Inventory Value</label>
+    <summarizedField>GFERP__Item_Ledger_Entry__c.GFERP__Total_Cost__c</summarizedField>
+    <summaryForeignKey>GFERP__Item_Ledger_Entry__c.GFERP__Item__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

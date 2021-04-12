@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Average_Base_Cost__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>if (ROUND(GFERP__Qty_Base_on_Hand__c,0.00001) = 0, 0, GFERP__Inventory_Value__c / GFERP__Qty_Base_on_Hand__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The calculated average cost for the Base Unit of Measure of the item.  (Inventory Value / Qty. Based on Hand)</inlineHelpText>
+    <label>Average Base Cost</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

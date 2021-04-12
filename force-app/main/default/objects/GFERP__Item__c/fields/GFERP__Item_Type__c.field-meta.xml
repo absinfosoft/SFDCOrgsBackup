@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Item_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The type of item with two possible values - Inventory or Service.  Inventory transaction will be maintained for Inventory items, but not for Service type items.</inlineHelpText>
+    <label>Item Type</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GFERP__Item_Type</valueSetName>
+    </valueSet>
+</CustomField>

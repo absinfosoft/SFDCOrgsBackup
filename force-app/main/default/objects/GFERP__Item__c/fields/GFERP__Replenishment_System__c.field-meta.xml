@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Replenishment_System__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the default method to replenish the inventory for the item with two possible options: Purchase or Work Order.  if the item can be both purchased and manufactured, enter Work Order.</inlineHelpText>
+    <label>Replenishment System</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Purchase</fullName>
+                <default>true</default>
+                <label>Purchase</label>
+            </value>
+            <value>
+                <fullName>Work Order</fullName>
+                <default>false</default>
+                <label>Work Order</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

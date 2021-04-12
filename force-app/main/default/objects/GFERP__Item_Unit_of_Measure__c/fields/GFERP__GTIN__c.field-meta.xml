@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__GTIN__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>GTIN (Global Trade Item Number) is used to identify items and units of measure. The GTIN can be used in GoldFinch to assist data entry on Sales Orders and Transfer Orders.</inlineHelpText>
+    <label>GTIN</label>
+    <length>80</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

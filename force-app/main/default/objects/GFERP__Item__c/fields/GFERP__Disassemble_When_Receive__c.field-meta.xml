@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Disassemble_When_Receive__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If checked, as soon as the item is received on a Whse. Receipts, a dissemble Item Journal will be created and posted to consume the item and output components to inventory.</inlineHelpText>
+    <label>Disassemble When Receive</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

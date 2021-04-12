@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Do_Not_Check_Qty_When_Post__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If checked, Qty Base on Hand, Qty. Base on Bin Content and Remaining Qty. Base on Hand of the item are not compared for consistency during the inventory posting routine.It is recommended not to select this field.Notify the administrator to select this.</inlineHelpText>
+    <label>Do Not Check Qty. When Post</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

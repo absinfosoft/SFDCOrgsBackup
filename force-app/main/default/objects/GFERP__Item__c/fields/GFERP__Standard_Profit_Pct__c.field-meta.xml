@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Standard_Profit_Pct__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>if ( ( GFERP__Standard_Base_Price__c ) &lt;&gt; 0, ( GFERP__Standard_Base_Price__c -  GFERP__Standard_Base_Cost__c ) / ( GFERP__Standard_Base_Price__c ),0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The calculated standard profit % of the item.  (Standard Profit / Standard Base Price)</inlineHelpText>
+    <label>Standard Profit %</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

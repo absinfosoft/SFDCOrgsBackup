@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Reorder_Cycle_Time_Unit__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Working with the Reorder Cycle, the reorder cycle determines the fixed regular interval to order the item.</inlineHelpText>
+    <label>Reorder Cycle Time Unit</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GFERP__Reorder_Cycle</valueSetName>
+    </valueSet>
+</CustomField>

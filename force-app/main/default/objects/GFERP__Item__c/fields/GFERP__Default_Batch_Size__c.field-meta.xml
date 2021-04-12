@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Default_Batch_Size__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>GFERP__Default_Batch_Unit_of_Measure__r.GFERP__Conversion__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The conversion factor of the Default Batch Unit of Measure.</inlineHelpText>
+    <label>Default Batch Size</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

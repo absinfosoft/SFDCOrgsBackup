@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Conversion_to_Base_Weight__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If the Type of this Unit of Measure is Weight and if Batch manufacturing is required, enter the conversion factor of this unit of measure to the Base Weight as defined in the Company Setup.</inlineHelpText>
+    <label>Conversion to Base Weight</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

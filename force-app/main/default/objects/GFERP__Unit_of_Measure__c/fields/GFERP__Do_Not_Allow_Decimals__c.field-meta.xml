@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Do_Not_Allow_Decimals__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this field if a decimal quantity will not be permitted for the Unit of Measure when posting inventory transactions (For Example, if you have an item with the Sales Unit of Measure of Case, you won&apos;t be able to sell half or .5 cases).</inlineHelpText>
+    <label>Do Not Allow Decimals</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

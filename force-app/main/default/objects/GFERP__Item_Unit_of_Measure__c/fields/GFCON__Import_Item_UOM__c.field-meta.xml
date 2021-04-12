@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFCON__Import_Item_UOM__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The Import Item UOM Record associated with the Item Unit of Measure.</inlineHelpText>
+    <label>Import Item UOM</label>
+    <referenceTo>GFCON__Import_Item_UOM__c</referenceTo>
+    <relationshipLabel>Item Units of Measure</relationshipLabel>
+    <relationshipName>Item_Units_of_Measure</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,75 @@
+<apex:page standardController="GFERP__Item__c" Extensions="GFINT_DownloadXMLtoLocalController" recordSetVar="" lightningStylesheets="true">
+    <style>
+        /*center top and bottom buttons*/
+        .pbHeader .pbTitle, .pbBottomButtons .pbTitle {
+        display: none!important;
+        }
+        .pbHeader .pbButton, .pbBottomButtons .pbButtonb  {
+        text-align: center!important;
+        }
+    </style>
+    <script type="text/javascript">
+    function CreateALLXML() {
+        var theSelectedItem = '{!itemSelectedIds}';
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.GFINT_DownloadXMLtoLocalController.createXMLFiles}',
+            '{!itemSelectedIds}',
+            function(result, event){
+                if (event.status) {
+                    for(var xmlFilename in result) {
+                        try {
+                            var filename = xmlFilename;
+                            var element = document.createElement('a');
+                            element.setAttribute('href', 'data:application/text;charset=utf-8,' + encodeURIComponent(decodeHTMLEntities(result[xmlFilename])));
+                            element.setAttribute('download', filename);
+                            element.style.display = 'none';
+                            document.body.appendChild(element);
+                            element.click();
+                            document.body.removeChild(element);
+                        } catch(e) {
+                            alert(e);
+                        }
+                    }
+                    
+                    
+                }
+            }, 
+            {escape: true}
+        );
+    }
+    
+    function decodeHTMLEntities(text) {
+        var entities = [
+            ['amp', '&'],
+            ['apos', '\''],
+            ['#x27', '\''],
+            ['#x2F', '/'],
+            ['#39', '\''],
+            ['#47', '/'],
+            ['lt', '<'],
+            ['gt', '>'],
+            ['nbsp', ' '],
+            ['quot', '"']
+        ];
+        
+        for (var i = 0, max = entities.length; i < max; ++i) 
+            text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+        
+        return text;
+    }
+    
+    </script>
+    
+    <GFERP:LoadingStatus />
+    <apex:sectionHeader title="Create XMLs to Download"/>
+    <apex:form id="theFrom">
+        <apex:pageBlock id="thePageBlock">
+            <apex:pageMessage severity="info" title="Are you sure to create and save XMLs to the Local drive for {!theItemCount} items?"/>
+            <apex:pageMessages id="theMessages"/>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Create XMLs" status="loadingstatus" oncomplete="CreateALLXML()"/>
+                <apex:commandButton value="Return" action="{!returnBack}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

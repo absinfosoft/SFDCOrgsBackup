@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Remaining_Qty_Base_on_Hand__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The remaining base quantity on hand of the item calculated from all open item ledger entries.</inlineHelpText>
+    <label>Remaining Qty. Base on Hand</label>
+    <summarizedField>GFERP__Item_Ledger_Entry__c.GFERP__Remaining_Qty_Base__c</summarizedField>
+    <summaryForeignKey>GFERP__Item_Ledger_Entry__c.GFERP__Item__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

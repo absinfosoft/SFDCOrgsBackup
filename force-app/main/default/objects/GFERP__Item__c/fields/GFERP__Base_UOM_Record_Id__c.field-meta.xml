@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Base_UOM_Record_Id__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Used to define the record Id from the Item Unit of Measure object for the Base Unit of Measure of the item.</inlineHelpText>
+    <label>Base UOM Record Id</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.Id</field>
+            <operation>equals</operation>
+            <valueField>GFERP__Item_Unit_of_Measure__c.GFERP__Item__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>GFERP__Item_Unit_of_Measure__c</referenceTo>
+    <relationshipLabel>Items (Base UOM)</relationshipLabel>
+    <relationshipName>Items</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

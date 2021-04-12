@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFERP__Qty_Available__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>GFERP__Qty_on_Hand__c - GFERP__Qty_Allocated__c -  GFERP__TO_Qty_Allocated__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Qty. on Hand – SO Qty. Allocated - TO Qty. Allocated</inlineHelpText>
+    <label>Qty. Available</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
